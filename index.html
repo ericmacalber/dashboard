@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eric Macalber | Developer Dashboard</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--panel2:#172238;--text:#eef3ff;--muted:#9ba9c4;--line:#273550;--accent:#75e0c1;--blue:#8ab4ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#142b40 0,transparent 45%),var(--bg);color:var(--text);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}.wrap{max-width:1120px;margin:auto;padding:32px 20px 56px}
+nav{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:34px}.brand{font-weight:800;letter-spacing:.2px}.pill{border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--muted);font-size:12px}
+.hero{display:grid;grid-template-columns:1.5fr .8fr;gap:22px;align-items:stretch}.panel{background:linear-gradient(145deg,rgba(23,34,56,.96),rgba(16,24,42,.96));border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:0 12px 35px #0002}
+.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:800}.hero h1{font-size:clamp(32px,5vw,54px);line-height:1.04;margin:12px 0}.hero p{color:var(--muted);max-width:650px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#071a19;font-weight:800}.btn.secondary{background:transparent;color:var(--text);border:1px solid var(--line)}
+.profile{display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center}.avatar{width:100px;height:100px;border-radius:50%;border:3px solid var(--accent);background:#202e47;object-fit:cover}.profile h2{margin:12px 0 0}.profile .muted{color:var(--muted);font-size:13px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 28px}.stat{padding:17px;background:var(--panel);border:1px solid var(--line);border-radius:15px}.stat strong{display:block;font-size:25px}.stat span{color:var(--muted);font-size:12px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:30px 0 14px}.section-head h2{margin:0;font-size:22px}.section-head p{margin:0;color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.repo{padding:19px;background:var(--panel);border:1px solid var(--line);border-radius:16px;min-width:0}.repo h3{margin:0 0 8px;font-size:17px;overflow-wrap:anywhere}.repo p{color:var(--muted);font-size:13px;min-height:42px}.repo-foot{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);margin-right:5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.skill-list{display:flex;flex-wrap:wrap;gap:8px}.skill{border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:7px 10px;font-size:12px;color:#dbe7ff}.note{border-left:3px solid var(--accent);padding:2px 0 2px 14px;color:var(--muted);font-size:13px}.loading{color:var(--muted)}footer{border-top:1px solid var(--line);margin-top:35px;padding-top:20px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){.hero,.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.wrap{padding:20px 14px 40px}}
+</style>
+</head>
+<body><main class="wrap">
+<nav><div class="brand">EM<span style="color:var(--accent)">.</span> / PORTFOLIO</div><a class="pill" href="https://github.com/ericmacalber" target="_blank" rel="noreferrer">View GitHub ↗</a></nav>
+<section class="hero">
+<div class="panel"><div class="eyebrow">Developer profile · learning in public</div><h1>Eric Macalber</h1><p>Building practical technology skills across cybersecurity, Linux, networking, automation, and open-source software. This dashboard highlights public projects and the learning journey behind them.</p><div class="actions"><a class="btn" href="https://github.com/ericmacalber?tab=repositories" target="_blank" rel="noreferrer">Explore projects</a><a class="btn secondary" href="https://github.com/ericmacalber" target="_blank" rel="noreferrer">GitHub profile ↗</a></div></div>
+<div class="panel profile"><img class="avatar" id="avatar" src="https://github.com/ericmacalber.png" alt="GitHub avatar"><h2 id="name">Eric Macalber</h2><div class="muted" id="handle">@ericmacalber</div><p id="bio">Cybersecurity · Linux · Networking · Automation</p><div class="muted" id="location"></div></div>
+</section>
+<section class="stats">
+<div class="stat"><strong id="repos">—</strong><span>Public repositories</span></div><div class="stat"><strong id="followers">—</strong><span>Followers</span></div><div class="stat"><strong id="following">—</strong><span>Following</span></div><div class="stat"><strong id="stars">—</strong><span>Stars across listed repos</span></div>
+</section>
+<div class="section-head"><div><h2>Featured repositories</h2><p>Automatically loaded from GitHub’s public API</p></div><span class="pill" id="status">Connecting…</span></div>
+<section class="grid" id="repo-grid"><div class="repo loading">Loading public repositories…</div></section>
+<div class="section-head"><div><h2>Focus areas</h2><p>Positioning to refine as projects mature</p></div></div>
+<section class="two">
+<div class="panel"><h3>Technical toolkit</h3><div class="skill-list"><span class="skill">Linux</span><span class="skill">Networking</span><span class="skill">Cybersecurity</span><span class="skill">Python / Automation</span><span class="skill">Git & GitHub</span><span class="skill">Virtualization</span><span class="skill">Monitoring</span><span class="skill">Documentation</span></div><p class="note">Keep only skills you can discuss honestly in an interview. Add tools when you can point to a project or lab demonstrating them.</p></div>
+<div class="panel"><h3>Current portfolio goals</h3><ul><li>Publish clear READMEs with setup steps and screenshots.</li><li>Show practical labs with diagrams, outcomes, and lessons learned.</li><li>Pin 3–6 strongest repositories on GitHub.</li><li>Keep secrets, tokens, personal data, and sensitive logs out of public repos.</li></ul></div>
+</section>
+<footer><span>Built for @ericmacalber · Live public data</span><span>Data may be limited by GitHub API rate limits.</span></footer>
+</main>
+<script>
+const user='ericmacalber';
+const fmt=n=>Number(n||0).toLocaleString();
+async function load(){
+ const status=document.getElementById('status');
+ try{
+  const [pr,rr]=await Promise.all([
+   fetch(`https://api.github.com/users/${user}`),
+   fetch(`https://api.github.com/users/${user}/repos?per_page=100&sort=updated`)
+  ]);
+  if(!pr.ok) throw new Error('GitHub profile could not be loaded ('+pr.status+').');
+  const p=await pr.json(); const repos=rr.ok?await rr.json():[];
+  document.getElementById('avatar').src=p.avatar_url||`https://github.com/${user}.png`;
+  document.getElementById('name').textContent=p.name||p.login;
+  document.getElementById('handle').textContent='@'+p.login;
+  document.getElementById('bio').textContent=p.bio||'Technology, cybersecurity, and continuous learning.';
+  document.getElementById('location').textContent=p.location||'';
+  document.getElementById('repos').textContent=fmt(p.public_repos);
+  document.getElementById('followers').textContent=fmt(p.followers);
+  document.getElementById('following').textContent=fmt(p.following);
+  document.getElementById('stars').textContent=fmt(repos.reduce((s,r)=>s+(r.stargazers_count||0),0));
+  const chosen=repos.filter(r=>!r.fork).sort((a,b)=>(b.stargazers_count-a.stargazers_count)||(new Date(b.pushed_at)-new Date(a.pushed_at))).slice(0,6);
+  const grid=document.getElementById('repo-grid'); grid.innerHTML='';
+  if(!chosen.length){grid.innerHTML='<div class="repo">No public repositories were returned. Add public projects to show them here.</div>';}
+  for(const r of chosen){
+   const card=document.createElement('article'); card.className='repo';
+   const title=document.createElement('h3'), link=document.createElement('a'); link.href=r.html_url; link.target='_blank'; link.rel='noreferrer'; link.textContent=r.name; title.appendChild(link);
+   const desc=document.createElement('p'); desc.textContent=r.description||'No description yet — add a short summary to help visitors understand this project.';
+   const foot=document.createElement('div'); foot.className='repo-foot';
+   const lang=document.createElement('span'); lang.innerHTML='<span class="dot"></span>'; lang.appendChild(document.createTextNode(r.language||'Language not specified'));
+   const stars=document.createElement('span'); stars.textContent='★ '+fmt(r.stargazers_count);
+   const forks=document.createElement('span'); forks.textContent='⑂ '+fmt(r.forks_count);
+   foot.append(lang,stars,forks); card.append(title,desc,foot); grid.appendChild(card);
+  }
+  status.textContent='Live data loaded';
+ }catch(e){status.textContent='Could not load';document.getElementById('repo-grid').innerHTML='<div class="repo">The live profile could not be loaded. Check your internet connection or GitHub API availability, then refresh. '+e.message+'</div>';}
+}
+load();
+</script>
+</body></html>
